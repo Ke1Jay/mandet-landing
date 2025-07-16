@@ -1,0 +1,472 @@
+---
+description: Comprehensive testing guidelines for Next.js 15 applications including unit tests, integration tests, accessibility tests, and performance monitoring
+alwaysApply: false
+---
+# Testing Guidelines for Next.js 15 Applications
+
+## Testing Philosophy
+
+### Testing Pyramid
+- **Unit Tests (70%)**: Test individual components and functions
+- **Integration Tests (20%)**: Test component interactions and API endpoints
+- **End-to-End Tests (10%)**: Test complete user journeys
+
+### Testing Principles
+- Write tests before or alongside implementation
+- Test behavior, not implementation details
+- Keep tests simple and focused
+- Use meaningful test descriptions
+- Maintain test coverage above 80%
+
+## Testing Setup
+
+### Required Dependencies
+```json
+{
+  "devDependencies": {
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/user-event": "^14.0.0",
+    "jest": "^29.0.0",
+    "jest-environment-jsdom": "^29.0.0",
+    "jest-axe": "^8.0.0",
+    "@types/jest": "^29.0.0",
+    "vitest": "^1.0.0"
+  }
+}
+```
+
+### Jest Configuration
+```javascript
+// jest.config.js
+const nextJest = require('next/jest');
+
+const createJestConfig = nextJest({
+  dir: './',
+});
+
+const customJestConfig = {
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testEnvironment: 'jsdom',
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/**/index.ts',
+  ],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
+};
+
+module.exports = createJestConfig(customJestConfig);
+```
+
+### Test Setup File
+```javascript
+// jest.setup.js
+import '@testing-library/jest-dom';
+import { toHaveNoViolations } from 'jest-axe';
+
+expect.extend(toHaveNoViolations);
+
+// Mock Next.js router
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    route: '/',
+    pathname: '/',
+    query: {},
+    asPath: '/',
+    push: jest.fn(),
+    replace: jest.fn(),
+  }),
+}));
+
+// Mock Next.js navigation
+jest.mock('next/navigation', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    prefetch: jest.fn(),
+  }),
+  useSearchParams: () => new URLSearchParams(),
+  usePathname: () => '/',
+}));
+```
+
+## Unit Testing Patterns
+
+### Component Testing
+```typescript
+// components/ServiceCard.test.tsx
+import { render, screen } from '@testing-library/react';
+import { axe } from 'jest-axe';
+import ServiceCard from './ServiceCard';
+
+const mockService = {
+  id: '1',
+  title: 'Process Automation',
+  description: 'Custom automation solutions for your business',
+  icon: 'automation',
+};
+
+describe('ServiceCard', () => {
+  it('renders service information correctly', () => {
+    render(<ServiceCard service={mockService} />);
+    
+    expect(screen.getByRole('heading', { name: /process automation/i })).toBeInTheDocument();
+    expect(screen.getByText(/custom automation solutions/i)).toBeInTheDocument();
+  });
+
+  it('handles different variants', () => {
+    render(<ServiceCard service={mockService} variant="featured" />);
+    
+    const card = screen.getByRole('article');
+    expect(card).toHaveClass('featured');
+  });
+
+  it('is accessible', async () => {
+    const { container } = render(<ServiceCard service={mockService} />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+});
+```
+
+### Hook Testing
+```typescript
+// hooks/useContactForm.test.tsx
+import { renderHook, act } from '@testing-library/react';
+import useContactForm from './useContactForm';
+
+describe('useContactForm', () => {
+  it('initializes with empty form state', () => {
+    const { result } = renderHook(() => useContactForm());
+    
+    expect(result.current.formData).toEqual({
+      name: '',
+      email: '',
+      message: '',
+    });
+    expect(result.current.errors).toEqual({});
+    expect(result.current.isSubmitting).toBe(false);
+  });
+
+  it('validates email format', () => {
+    const { result } = renderHook(() => useContactForm());
+    
+    act(() => {
+      result.current.setFormData({
+        name: 'John Doe',
+        email: 'invalid-email',
+        message: 'Test message',
+      });
+    });
+
+    act(() => {
+      result.current.validate();
+    });
+
+    expect(result.current.errors.email).toBe('Please enter a valid email address');
+  });
+
+  it('submits form successfully', async () => {
+    const mockSubmit = jest.fn().mockResolvedValue({ success: true });
+    const { result } = renderHook(() => useContactForm(mockSubmit));
+    
+    act(() => {
+      result.current.setFormData({
+        name: 'John Doe',
+        email: 'john@example.com',
+        message: 'Test message',
+      });
+    });
+
+    await act(async () => {
+      await result.current.handleSubmit();
+    });
+
+    expect(mockSubmit).toHaveBeenCalledWith({
+      name: 'John Doe',
+      email: 'john@example.com',
+      message: 'Test message',
+    });
+    expect(result.current.isSubmitting).toBe(false);
+  });
+});
+```
+
+### Utility Function Testing
+```typescript
+// lib/utils.test.ts
+import { formatPhoneNumber, validateEmail, cn } from './utils';
+
+describe('utils', () => {
+  describe('formatPhoneNumber', () => {
+    it('formats US phone numbers correctly', () => {
+      expect(formatPhoneNumber('1234567890')).toBe('(123) 456-7890');
+      expect(formatPhoneNumber('123-456-7890')).toBe('(123) 456-7890');
+    });
+
+    it('handles invalid phone numbers', () => {
+      expect(formatPhoneNumber('123')).toBe('123');
+      expect(formatPhoneNumber('')).toBe('');
+    });
+  });
+
+  describe('validateEmail', () => {
+    it('validates correct email formats', () => {
+      expect(validateEmail('test@example.com')).toBe(true);
+      expect(validateEmail('user.name@domain.co.uk')).toBe(true);
+    });
+
+    it('rejects invalid email formats', () => {
+      expect(validateEmail('invalid-email')).toBe(false);
+      expect(validateEmail('test@')).toBe(false);
+      expect(validateEmail('')).toBe(false);
+    });
+  });
+
+  describe('cn (className utility)', () => {
+    it('combines class names correctly', () => {
+      expect(cn('base-class', 'additional-class')).toBe('base-class additional-class');
+    });
+
+    it('handles conditional classes', () => {
+      expect(cn('base', { 'active': true, 'disabled': false })).toBe('base active');
+    });
+  });
+});
+```
+
+## Integration Testing
+
+### Form Integration Testing
+```typescript
+// components/ContactForm.test.tsx
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import ContactForm from './ContactForm';
+
+// Mock the server action
+jest.mock('../actions/contact', () => ({
+  submitContact: jest.fn(),
+}));
+
+describe('ContactForm Integration', () => {
+  const user = userEvent.setup();
+
+  it('submits form with valid data', async () => {
+    const mockSubmit = require('../actions/contact').submitContact;
+    mockSubmit.mockResolvedValue({ success: true });
+
+    render(<ContactForm />);
+    
+    await user.type(screen.getByLabelText(/name/i), 'John Doe');
+    await user.type(screen.getByLabelText(/email/i), 'john@example.com');
+    await user.type(screen.getByLabelText(/message/i), 'I need help with automation');
+    
+    await user.click(screen.getByRole('button', { name: /send message/i }));
+    
+    await waitFor(() => {
+      expect(mockSubmit).toHaveBeenCalledWith(expect.any(FormData));
+    });
+    
+    expect(screen.getByText(/thank you for your message/i)).toBeInTheDocument();
+  });
+
+  it('shows validation errors for invalid data', async () => {
+    render(<ContactForm />);
+    
+    await user.click(screen.getByRole('button', { name: /send message/i }));
+    
+    await waitFor(() => {
+      expect(screen.getByText(/name is required/i)).toBeInTheDocument();
+      expect(screen.getByText(/email is required/i)).toBeInTheDocument();
+      expect(screen.getByText(/message is required/i)).toBeInTheDocument();
+    });
+  });
+});
+```
+
+### API Route Testing
+```typescript
+// app/api/contact/route.test.ts
+import { NextRequest } from 'next/server';
+import { POST } from './route';
+
+describe('/api/contact', () => {
+  it('handles valid contact submission', async () => {
+    const formData = new FormData();
+    formData.append('name', 'John Doe');
+    formData.append('email', 'john@example.com');
+    formData.append('message', 'Test message');
+
+    const request = new NextRequest('http://localhost:3000/api/contact', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const response = await POST(request);
+    const data = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(data.success).toBe(true);
+  });
+
+  it('returns error for invalid data', async () => {
+    const formData = new FormData();
+    formData.append('name', '');
+    formData.append('email', 'invalid-email');
+    formData.append('message', '');
+
+    const request = new NextRequest('http://localhost:3000/api/contact', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const response = await POST(request);
+    const data = await response.json();
+
+    expect(response.status).toBe(400);
+    expect(data.errors).toBeDefined();
+  });
+});
+```
+
+## Performance Testing
+
+### Core Web Vitals Testing
+```typescript
+// lib/performance.test.ts
+import { measureLCP, measureINP, measureCLS } from './performance';
+
+describe('Performance Metrics', () => {
+  it('measures LCP within acceptable range', async () => {
+    const lcp = await measureLCP();
+    expect(lcp).toBeLessThan(2500); // 2.5 seconds
+  });
+
+  it('measures INP within acceptable range', async () => {
+    const inp = await measureINP();
+    expect(inp).toBeLessThan(200); // 200 milliseconds
+  });
+
+  it('measures CLS within acceptable range', async () => {
+    const cls = await measureCLS();
+    expect(cls).toBeLessThan(0.1); // 0.1 layout shift score
+  });
+});
+```
+
+### Bundle Size Testing
+```typescript
+// scripts/bundle-size.test.ts
+describe('Bundle Size', () => {
+  it('keeps main bundle under size limit', async () => {
+    const stats = await getBundleStats();
+    const mainBundleSize = stats.assets.find(asset => asset.name.includes('main'))?.size;
+    
+    expect(mainBundleSize).toBeLessThan(250 * 1024); // 250KB
+  });
+
+  it('properly splits code by route', async () => {
+    const stats = await getBundleStats();
+    const chunks = stats.chunks.filter(chunk => chunk.names.includes('pages/'));
+    
+    expect(chunks.length).toBeGreaterThan(1);
+  });
+});
+```
+
+## Test Organization
+
+### File Structure
+```
+src/
+├── components/
+│   ├── ServiceCard.tsx
+│   └── ServiceCard.test.tsx
+├── hooks/
+│   ├── useContactForm.ts
+│   └── useContactForm.test.ts
+├── lib/
+│   ├── utils.ts
+│   └── utils.test.ts
+├── app/
+│   └── api/
+│       └── contact/
+│           ├── route.ts
+│           └── route.test.ts
+└── __tests__/
+    ├── setup.ts
+    └── helpers/
+```
+
+### Test Utilities
+```typescript
+// __tests__/helpers/test-utils.tsx
+import { render, RenderOptions } from '@testing-library/react';
+import { ReactElement } from 'react';
+
+// Custom render function with providers
+const customRender = (ui: ReactElement, options?: RenderOptions) => {
+  const AllProviders = ({ children }: { children: React.ReactNode }) => {
+    return (
+      <ThemeProvider>
+        <QueryProvider>
+          {children}
+        </QueryProvider>
+      </ThemeProvider>
+    );
+  };
+
+  return render(ui, { wrapper: AllProviders, ...options });
+};
+
+// Export everything from testing library
+export * from '@testing-library/react';
+export { customRender as render };
+```
+
+## Testing Commands
+
+### Package.json Scripts
+```json
+{
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:accessibility": "jest --testNamePattern='accessibility'",
+    "test:performance": "jest --testNamePattern='performance'",
+    "test:e2e": "playwright test"
+  }
+}
+```
+
+## Questions to Ask When Testing
+
+- Does this test cover the most important user behavior?
+- Is the test readable and maintainable?
+- Does this test verify accessibility requirements?
+- Are error states and edge cases covered?
+- Is the test isolated and doesn't depend on external factors?
+- Does this test provide meaningful feedback when it fails?
+- Are performance implications considered?
+- Is the test suite fast enough for continuous development?
+
+## Best Practices Summary
+
+1. **Test Behavior, Not Implementation**: Focus on what the user experiences
+2. **Write Descriptive Test Names**: Make test failures easy to understand
+3. **Use Page Object Model**: For complex E2E tests
+4. **Mock External Dependencies**: Keep tests isolated and fast
+5. **Test Accessibility**: Include axe-core in component tests
+6. **Monitor Performance**: Test Core Web Vitals regularly
+7. **Maintain Coverage**: Keep coverage above 80%
+8. **Review Test Quality**: Regularly refactor and improve tests

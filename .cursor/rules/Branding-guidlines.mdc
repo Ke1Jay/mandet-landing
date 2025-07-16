@@ -1,0 +1,103 @@
+---
+description: Branding guidelines for Mandet.co Next.js landing page with color tokens, typography, and visual identity standards
+alwaysApply: false
+---
+
+# Mandet.co Branding Guidelines
+
+## Company Overview
+Mandet.co specializes in:
+- **Process Automation**: Custom automations and AI-enhanced automation solutions using Make.ai, n8n, and other tools
+- **E-commerce Development**: Shopify store creation, enhancement, custom apps and functionalities
+- **Full-Stack Development**: Websites, web applications, mobile apps, and comprehensive web solutions
+
+## Color System
+
+### Light Theme Colors
+- **Primary**: #[INSERT_FROM_FIGMA] - Main brand color for CTAs and key elements
+- **Secondary**: #[INSERT_FROM_FIGMA] - Supporting brand color
+- **Accent**: #[INSERT_FROM_FIGMA] - Highlights and interactive elements
+- **Background**: #[INSERT_FROM_FIGMA] - Main background color
+- **Surface**: #[INSERT_FROM_FIGMA] - Card and component backgrounds
+- **Text Primary**: #[INSERT_FROM_FIGMA] - Main text color
+- **Text Secondary**: #[INSERT_FROM_FIGMA] - Supporting text color
+
+### Dark Theme Colors
+- **Primary**: #[INSERT_FROM_FIGMA] - Main brand color for CTAs and key elements
+- **Secondary**: #[INSERT_FROM_FIGMA] - Supporting brand color
+- **Accent**: #[INSERT_FROM_FIGMA] - Highlights and interactive elements
+- **Background**: #[INSERT_FROM_FIGMA] - Main background color
+- **Surface**: #[INSERT_FROM_FIGMA] - Card and component backgrounds
+- **Text Primary**: #[INSERT_FROM_FIGMA] - Main text color
+- **Text Secondary**: #[INSERT_FROM_FIGMA] - Supporting text color
+
+## Typography System
+
+### Primary Font Options (Choose One)
+1. **Inter** - Modern, highly readable, excellent for tech brands
+2. **Poppins** - Geometric, friendly, great for automation/tech services
+3. **Raleway** - Elegant, sophisticated, perfect for professional services
+4. **Montserrat** - Current choice, geometric sans-serif
+
+### Secondary/Accent Font Options
+1. **Lora** - Serif for contrast and elegance in headings
+2. **Playfair Display** - Sophisticated serif for special headings
+3. **Source Sans Pro** - Clean, professional for body text
+
+### Font Implementation
+- **Headings (H1-H3)**: Primary font, weights 400-700
+- **Body Text**: Primary font, weight 400
+- **Captions/Small Text**: Primary font, weight 300-400
+- **Buttons**: Primary font, weight 500-600
+
+## Visual Identity Standards
+
+### Logo Usage
+- Maintain clear space equal to the height of the logo
+- Never stretch or distort the logo
+- Use appropriate logo variant for light/dark themes
+
+### Spacing System
+- **Base unit**: 4px (0.25rem)
+- **Small**: 8px (0.5rem)
+- **Medium**: 16px (1rem)
+- **Large**: 24px (1.5rem)
+- **Extra Large**: 32px (2rem)
+
+### Border Radius
+- **Small**: 4px
+- **Medium**: 8px
+- **Large**: 16px
+- **Circle**: 50%
+
+### Shadows
+- **Small**: 0 1px 3px rgba(0, 0, 0, 0.1)
+- **Medium**: 0 4px 6px rgba(0, 0, 0, 0.1)
+- **Large**: 0 10px 25px rgba(0, 0, 0, 0.1)
+
+## Implementation Guidelines
+
+### Tailwind CSS Classes
+Always use these predefined classes for consistency:
+- Colors: `bg-primary`, `text-primary`, `border-primary`
+- Spacing: `p-4`, `m-6`, `gap-4`
+- Typography: `font-primary`, `text-lg`, `font-medium`
+
+### Component Styling
+- Use consistent hover states with 200ms transitions
+- Implement focus states for accessibility
+- Maintain 4.5:1 color contrast ratio minimum
+- Use semantic color names in design system
+
+### Brand Voice Reflection in Design
+- Clean, professional, and innovative visual approach
+- Emphasize automation and efficiency through streamlined layouts
+- Use white space effectively to convey sophistication
+- Incorporate subtle animations that suggest automated processes
+
+## Questions to Ask When Implementing
+- Does this color combination meet WCAG 2.1 AA contrast standards?
+- Is the font size readable across all devices?
+- Does the visual hierarchy support the content structure?
+- Are interactive elements clearly distinguishable?
+- Does the design reflect Mandet's expertise in automation and development?

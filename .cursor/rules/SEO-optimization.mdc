@@ -1,0 +1,169 @@
+---
+description: SEO optimization standards for Mandet.co landing page with Next.js 15 metadata API, Core Web Vitals, and search engine optimization
+alwaysApply: false
+---
+# Mandet.co SEO Optimization Standards
+
+## Domain Information
+- **Primary Domain**: mandet.co
+- **Target Audience**: Businesses seeking automation, e-commerce, and web development solutions
+- **Primary Services**: Process automation, Shopify development, full-stack web solutions
+
+## Metadata Requirements
+
+### Page-Level Metadata (Using Next.js 15 Metadata API)
+Every page MUST include:
+```typescript
+export const metadata: Metadata = {
+  title: "Specific Page Title | Mandet.co",
+  description: "Compelling 150-160 character description with target keywords",
+  keywords: ["automation", "shopify development", "web development", "process automation"],
+  authors: [{ name: "Mandet Team" }],
+  creator: "Mandet.co",
+  publisher: "Mandet.co",
+  robots: "index, follow",
+  openGraph: {
+    title: "Page Title",
+    description: "Description for social sharing",
+    url: "https://mandet.co/page-url",
+    siteName: "Mandet.co",
+    images: [
+      {
+        url: "https://mandet.co/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Mandet.co - Automation & Development Solutions"
+      }
+    ],
+    locale: "en_US",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Page Title",
+    description: "Description for Twitter",
+    images: ["https://mandet.co/twitter-image.jpg"]
+  },
+  alternates: {
+    canonical: "https://mandet.co/page-url"
+  }
+}
+```
+
+### Schema Markup Requirements
+Implement structured data for:
+
+#### Organization Schema
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Mandet",
+  "url": "https://mandet.co",
+  "logo": "https://mandet.co/logo.png",
+  "description": "Automation and development solutions including process automation, Shopify development, and full-stack web services",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "LV",
+    "addressLocality": "Riga"
+  },
+  "sameAs": [
+    "SOCIAL_MEDIA_LINKS"
+  ]
+}
+```
+
+#### Service Schema
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "SERVICE_NAME",
+  "description": "SERVICE_DESCRIPTION",
+  "provider": {
+    "@type": "Organization",
+    "name": "Mandet"
+  },
+  "serviceType": "automation|ecommerce|development"
+}
+```
+
+## Core Web Vitals Targets
+
+### Performance Standards
+- **Largest Contentful Paint (LCP)**: < 2.5 seconds
+- **Interaction to Next Paint (INP)**: < 200 milliseconds
+- **Cumulative Layout Shift (CLS)**: < 0.1
+
+### Implementation Requirements
+- Use Next.js Image component for all images
+- Implement lazy loading for below-fold content
+- Optimize font loading with `font-display: swap`
+- Minimize JavaScript bundle size
+- Use server-side rendering for critical content
+
+## Content Optimization
+
+### Keyword Strategy
+**Primary Keywords:**
+- Process automation
+- Shopify development
+- Custom automation solutions
+- E-commerce development
+- Web application development
+
+**Secondary Keywords:**
+- Make.ai automation
+- n8n workflows
+- Shopify apps
+- Custom web solutions
+- Business process automation
+
+### Content Structure
+- Use H1 for main page title (only one per page)
+- Structure content with H2-H6 hierarchy
+- Include target keywords naturally in headings
+- Write descriptive alt text for all images
+- Use semantic HTML elements
+
+## Technical SEO Requirements
+
+### URL Structure
+- Use kebab-case: `/services/shopify-development`
+- Include target keywords in URLs
+- Keep URLs under 60 characters
+- Avoid deep nesting (max 3 levels)
+
+### Internal Linking
+- Link to related services and pages
+- Use descriptive anchor text
+- Create topic clusters around main services
+- Include breadcrumb navigation
+
+### Site Architecture
+- Create XML sitemap automatically
+- Implement robots.txt
+- Use proper redirects (301 for permanent)
+- Set up canonical URLs
+
+## Audit Questions
+Before publishing any page, verify:
+- Is the page title unique and under 60 characters?
+- Does the meta description compelling and under 160 characters?
+- Are all images optimized with proper alt text?
+- Is the content structured with proper headings?
+- Are Core Web Vitals targets met?
+- Is schema markup implemented correctly?
+- Are internal links relevant and helpful?
+- Does the page load in under 3 seconds?
+
+## Error Handling
+- Implement proper 404 pages
+- Set up error monitoring
+- Create custom error pages that maintain SEO value
+- Monitor for broken links and redirects
+
+## Local SEO (if applicable)
+- Include location-based keywords for Riga, Latvia
+- Add business hours and contact information
+- Implement local business schema markup

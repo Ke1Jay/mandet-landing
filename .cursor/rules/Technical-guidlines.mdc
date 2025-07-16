@@ -1,0 +1,318 @@
+---
+description: Technical implementation guidelines for Next.js 15 App Router, TypeScript, Tailwind CSS, and modern web development practices
+globs: "**/*.{tsx,ts,jsx,js,css,scss,json}"
+alwaysApply: true
+---
+
+# Next.js 15 Technical Implementation Guidelines
+
+## Project Structure Standards
+
+### Directory Organization
+```
+src/
+├── app/                    # Next.js 15 App Router
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Homepage
+│   ├── globals.css        # Global styles
+│   └── (sections)/        # Route groups
+├── components/            # Reusable components
+│   ├── ui/               # Base UI components
+│   ├── sections/         # Landing page sections
+│   └── forms/            # Form components
+├── lib/                  # Utilities and configurations
+├── hooks/                # Custom React hooks
+├── types/                # TypeScript type definitions
+└── styles/               # Additional stylesheets
+```
+
+## Next.js 15 App Router Best Practices
+
+### Server Components (Default)
+- Use Server Components by default for better performance
+- Fetch data directly in Server Components
+- Keep components async when fetching data
+- Only use 'use client' when necessary
+
+```typescript
+// ✅ Good - Server Component with data fetching
+export default async function ServicesSection() {
+  const services = await getServices();
+  
+  return (
+    <section className="py-16">
+      {services.map(service => (
+        <ServiceCard key={service.id} service={service} />
+      ))}
+    </section>
+  );
+}
+```
+
+### Client Components
+- Use 'use client' only for interactive components
+- Keep client components small and focused
+- Use React hooks only in client components
+
+```typescript
+// ✅ Good - Client Component for interactivity
+'use client';
+
+import { useState } from 'react';
+
+export default function ContactForm() {
+  const [email, setEmail] = useState('');
+  // Component logic...
+}
+```
+
+### Server Actions
+- Use Server Actions for form submissions
+- Handle validation and errors properly
+- Return proper response types
+
+```typescript
+// ✅ Good - Server Action
+'use server';
+
+import { z } from 'zod';
+import { redirect } from 'next/navigation';
+
+const contactSchema = z.object({
+  email: z.string().email(),
+  message: z.string().min(10),
+});
+
+export async function submitContact(formData: FormData) {
+  const parsed = contactSchema.safeParse({
+    email: formData.get('email'),
+    message: formData.get('message'),
+  });
+
+  if (!parsed.success) {
+    return { error: 'Invalid form data' };
+  }
+
+  // Process form submission
+  await saveContact(parsed.data);
+  redirect('/thank-you');
+}
+```
+
+## TypeScript Configuration
+
+### Strict Mode Settings
+Enable strict mode in tsconfig.json:
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "alwaysStrict": true
+  }
+}
+```
+
+### Type Definitions
+- Create interfaces for all props and data structures
+- Use discriminated unions for complex state
+- Export types from dedicated files
+
+```typescript
+// ✅ Good - Proper typing
+interface ServiceCardProps {
+  service: {
+    id: string;
+    title: string;
+    description: string;
+    icon: string;
+  };
+  variant?: 'default' | 'featured';
+}
+
+export default function ServiceCard({ service, variant = 'default' }: ServiceCardProps) {
+  // Component implementation
+}
+```
+
+## Tailwind CSS Optimization
+
+### Configuration
+```javascript
+// tailwind.config.js
+module.exports = {
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)',
+        accent: 'var(--accent)',
+      },
+      fontFamily: {
+        primary: ['Inter', 'sans-serif'],
+        secondary: ['Lora', 'serif'],
+      },
+    },
+  },
+  plugins: [],
+}
+```
+
+### Class Organization
+- Use utility classes for spacing and layout
+- Create component classes for repeated patterns
+- Group related classes together
+
+```typescript
+// ✅ Good - Organized classes
+const buttonClasses = cn(
+  'inline-flex items-center justify-center',
+  'px-6 py-3 text-base font-medium',
+  'rounded-lg transition-all duration-200',
+  'focus:outline-none focus:ring-2 focus:ring-offset-2',
+  {
+    'bg-primary text-white hover:bg-primary/90': variant === 'primary',
+    'bg-secondary text-white hover:bg-secondary/90': variant === 'secondary',
+  }
+);
+```
+
+## Performance Optimization
+
+### Image Optimization
+- Always use Next.js Image component
+- Provide proper alt text
+- Use appropriate sizes and formats
+
+```typescript
+import Image from 'next/image';
+
+// ✅ Good - Optimized image usage
+<Image
+  src="/hero-image.jpg"
+  alt="Mandet automation solutions dashboard"
+  width={1200}
+  height={600}
+  priority
+  className="rounded-lg shadow-lg"
+/>
+```
+
+### Font Optimization
+```typescript
+// app/layout.tsx
+import { Inter, Lora } from 'next/font/google';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const lora = Lora({
+  subsets: ['latin'],
+  variable: '--font-lora',
+  display: 'swap',
+});
+```
+
+### Bundle Optimization
+- Use dynamic imports for heavy components
+- Implement code splitting
+- Optimize third-party scripts
+
+```typescript
+// ✅ Good - Dynamic import
+const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
+  loading: () => <div>Loading...</div>,
+});
+```
+
+## State Management
+
+### URL State (Preferred)
+- Use searchParams for filters and pagination
+- Implement proper state serialization
+- Use nuqs library for complex URL state
+
+```typescript
+// ✅ Good - URL state management
+import { useSearchParams } from 'next/navigation';
+
+export default function ServiceFilter() {
+  const searchParams = useSearchParams();
+  const category = searchParams.get('category') || 'all';
+  
+  // Component logic
+}
+```
+
+### Local State
+- Use useState for component-level state
+- Use useContext for shared state
+- Avoid prop drilling
+
+## Error Handling
+
+### Error Boundaries
+```typescript
+// components/ErrorBoundary.tsx
+'use client';
+
+export default function ErrorBoundary({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold">Something went wrong!</h2>
+        <button onClick={reset} className="mt-4 btn-primary">
+          Try again
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+## Security Best Practices
+
+### Environment Variables
+- Use .env.local for sensitive data
+- Validate environment variables
+- Never expose secrets to client-side
+
+### Input Validation
+- Validate all user inputs
+- Use Zod for schema validation
+- Sanitize data before processing
+
+## Performance Monitoring
+
+### Core Web Vitals
+- Monitor LCP, INP, CLS
+- Use Next.js Analytics
+- Implement error tracking
+
+### Questions to Ask
+- Are all components properly typed?
+- Is the component server-side or client-side appropriate?
+- Are images optimized with proper alt text?
+- Is the bundle size minimized?
+- Are Core Web Vitals targets met?
+- Is error handling implemented?
+- Are security best practices followed?

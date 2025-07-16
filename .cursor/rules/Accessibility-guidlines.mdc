@@ -1,0 +1,420 @@
+---
+description: Web accessibility guidelines ensuring WCAG 2.1 AA compliance for inclusive design and optimal user experience across all abilities
+alwaysApply: false
+---
+# Web Accessibility Guidelines (WCAG 2.1 AA Compliance)
+
+## Accessibility Principles (POUR)
+
+### Perceivable
+- All content must be presentable in ways users can perceive
+- Provide text alternatives for non-text content
+- Ensure sufficient color contrast
+- Make content adaptable to different presentations
+
+### Operable
+- All functionality must be operable through keyboard navigation
+- Give users enough time to read and use content
+- Do not use content that causes seizures
+- Help users navigate and find content
+
+### Understandable
+- Make text readable and understandable
+- Make content appear and operate in predictable ways
+- Help users avoid and correct mistakes
+
+### Robust
+- Content must be robust enough to work with assistive technologies
+- Use valid, semantic HTML
+- Ensure compatibility with screen readers
+
+## Implementation Requirements
+
+### Semantic HTML Structure
+```html
+<!-- ✅ Good - Semantic HTML -->
+<main>
+  <header>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <section aria-labelledby="services-heading">
+    <h2 id="services-heading">Our Services</h2>
+    <article>
+      <h3>Process Automation</h3>
+      <p>Custom automation solutions...</p>
+    </article>
+  </section>
+</main>
+```
+
+### Color Contrast Requirements
+- **Normal text**: 4.5:1 contrast ratio minimum
+- **Large text (18px+)**: 3:1 contrast ratio minimum
+- **UI components**: 3:1 contrast ratio minimum
+- **Focus indicators**: 3:1 contrast ratio minimum
+
+### Keyboard Navigation
+```typescript
+// ✅ Good - Keyboard accessible component
+interface ButtonProps {
+  onClick: () => void;
+  children: React.ReactNode;
+  variant?: 'primary' | 'secondary';
+  disabled?: boolean;
+}
+
+export default function Button({ onClick, children, variant = 'primary', disabled }: ButtonProps) {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      disabled={disabled}
+      className={cn(
+        'px-4 py-2 rounded-lg font-medium transition-all duration-200',
+        'focus:outline-none focus:ring-2 focus:ring-offset-2',
+        'focus:ring-primary focus:ring-opacity-50',
+        {
+          'bg-primary text-white hover:bg-primary/90': variant === 'primary',
+          'bg-secondary text-white hover:bg-secondary/90': variant === 'secondary',
+          'opacity-50 cursor-not-allowed': disabled,
+        }
+      )}
+      aria-disabled={disabled}
+    >
+      {children}
+    </button>
+  );
+}
+```
+
+### Focus Management
+```typescript
+// ✅ Good - Focus management in modal
+'use client';
+
+import { useEffect, useRef } from 'react';
+
+export default function Modal({ isOpen, onClose, children }: ModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousFocus = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      previousFocus.current = document.activeElement as HTMLElement;
+      modalRef.current?.focus();
+    }
+
+    return () => {
+      if (previousFocus.current) {
+        previousFocus.current.focus();
+      }
+    };
+  }, [isOpen]);
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <div
+        ref={modalRef}
+        className="bg-white rounded-lg p-6 max-w-md w-full mx-4"
+        onClick={(e) => e.stopPropagation()}
+        onKeyDown={handleKeyDown}
+        tabIndex={-1}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+```
+
+### Form Accessibility
+```typescript
+// ✅ Good - Accessible form implementation
+interface FormFieldProps {
+  label: string;
+  name: string;
+  type?: string;
+  required?: boolean;
+  error?: string;
+  placeholder?: string;
+}
+
+export default function FormField({ 
+  label, 
+  name, 
+  type = 'text', 
+  required, 
+  error, 
+  placeholder 
+}: FormFieldProps) {
+  const id = `field-${name}`;
+  const errorId = `error-${name}`;
+
+  return (
+    <div className="mb-4">
+      <label 
+        htmlFor={id}
+        className="block text-sm font-medium text-gray-700 mb-1"
+      >
+        {label}
+        {required && <span className="text-red-500 ml-1" aria-label="required">*</span>}
+      </label>
+      
+      <input
+        type={type}
+        id={id}
+        name={name}
+        required={required}
+        placeholder={placeholder}
+        aria-invalid={!!error}
+        aria-describedby={error ? errorId : undefined}
+        className={cn(
+          'w-full px-3 py-2 border rounded-md',
+          'focus:outline-none focus:ring-2 focus:ring-primary',
+          'placeholder-gray-400',
+          {
+            'border-red-500 focus:ring-red-500': error,
+            'border-gray-300': !error,
+          }
+        )}
+      />
+      
+      {error && (
+        <p id={errorId} className="mt-1 text-sm text-red-600" role="alert">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+```
+
+### Image Accessibility
+```typescript
+// ✅ Good - Accessible image implementation
+import Image from 'next/image';
+
+interface AccessibleImageProps {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
+  decorative?: boolean;
+}
+
+export default function AccessibleImage({ 
+  src, 
+  alt, 
+  width, 
+  height, 
+  caption, 
+  decorative = false 
+}: AccessibleImageProps) {
+  return (
+    <figure className="my-4">
+      <Image
+        src={src}
+        alt={decorative ? '' : alt}
+        width={width}
+        height={height}
+        className="rounded-lg shadow-md"
+        role={decorative ? 'presentation' : undefined}
+        aria-hidden={decorative}
+      />
+      {caption && !decorative && (
+        <figcaption className="mt-2 text-sm text-gray-600 text-center">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+```
+
+### ARIA Implementation
+```typescript
+// ✅ Good - ARIA usage for complex UI
+export default function ExpandableSection({ title, children, defaultOpen = false }: ExpandableSectionProps) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  const contentId = `content-${title.toLowerCase().replace(/\s+/g, '-')}`;
+
+  return (
+    <div className="border rounded-lg overflow-hidden">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-4 py-3 text-left bg-gray-50 hover:bg-gray-100 transition-colors"
+        aria-expanded={isOpen}
+        aria-controls={contentId}
+        aria-describedby={`${contentId}-description`}
+      >
+        <div className="flex items-center justify-between">
+          <span className="font-medium">{title}</span>
+          <svg
+            className={cn('w-5 h-5 transform transition-transform', {
+              'rotate-180': isOpen,
+            })}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </button>
+      
+      <div
+        id={contentId}
+        className={cn('px-4 py-3 bg-white transition-all duration-300 overflow-hidden', {
+          'max-h-0 py-0': !isOpen,
+          'max-h-96': isOpen,
+        })}
+        aria-hidden={!isOpen}
+      >
+        <div id={`${contentId}-description`}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+## Testing Requirements
+
+### Automated Testing
+```typescript
+// Example using jest-axe
+import { axe, toHaveNoViolations } from 'jest-axe';
+import { render } from '@testing-library/react';
+
+expect.extend(toHaveNoViolations);
+
+describe('Accessibility Tests', () => {
+  test('ContactForm should be accessible', async () => {
+    const { container } = render(<ContactForm />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
+  });
+});
+```
+
+### Manual Testing Checklist
+- [ ] Can you navigate the entire page using only the keyboard?
+- [ ] Are all interactive elements focusable and clearly indicated?
+- [ ] Do all images have appropriate alt text?
+- [ ] Are form fields properly labeled and associated?
+- [ ] Does the page work with screen readers?
+- [ ] Are error messages clearly communicated?
+- [ ] Does the page maintain focus management?
+- [ ] Are all colors meeting contrast requirements?
+
+## Content Guidelines
+
+### Alternative Text for Images
+- **Decorative images**: Use empty alt="" or aria-hidden="true"
+- **Informative images**: Describe the content and context
+- **Functional images**: Describe the function, not appearance
+- **Complex images**: Provide detailed description elsewhere
+
+### Heading Structure
+- Use logical heading hierarchy (h1 → h2 → h3)
+- Don't skip heading levels
+- Use headings for structure, not styling
+- Ensure each page has one h1
+
+### Link Accessibility
+- Use descriptive link text
+- Avoid "click here" or "read more"
+- Distinguish links from surrounding text
+- Provide context for link purpose
+
+## Common Patterns
+
+### Skip Navigation
+```typescript
+// ✅ Good - Skip navigation implementation
+export default function SkipNavigation() {
+  return (
+    <a
+      href="#main-content"
+      className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-br-lg"
+    >
+      Skip to main content
+    </a>
+  );
+}
+```
+
+### Screen Reader Only Content
+```css
+/* Tailwind CSS utility for screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+```
+
+## Questions to Ask
+- Can this component be used with keyboard only?
+- Are all interactive elements properly labeled?
+- Does this meet color contrast requirements?
+- Is the content structure logical for screen readers?
+- Are error states clearly communicated?
+- Does this work with assistive technologies?
+- Are animations respectful of reduced motion preferences?
+- Is the focus management appropriate?
+
+## Resources and Tools
+- **Automated Testing**: axe-core, jest-axe
+- **Color Contrast**: WebAIM Color Contrast Checker
+- **Screen Reader Testing**: NVDA, VoiceOver
+- **Browser Extensions**: axe DevTools, WAVE
+- **Documentation**: WCAG 2.1 Guidelines, WAI-ARIA Authoring Practices
