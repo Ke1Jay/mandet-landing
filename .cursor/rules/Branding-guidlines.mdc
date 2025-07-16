@@ -13,36 +13,32 @@ Mandet.co specializes in:
 
 ## Color System
 
-### Light Theme Colors
-- **Primary**: #[INSERT_FROM_FIGMA] - Main brand color for CTAs and key elements
-- **Secondary**: #[INSERT_FROM_FIGMA] - Supporting brand color
-- **Accent**: #[INSERT_FROM_FIGMA] - Highlights and interactive elements
-- **Background**: #[INSERT_FROM_FIGMA] - Main background color
-- **Surface**: #[INSERT_FROM_FIGMA] - Card and component backgrounds
-- **Text Primary**: #[INSERT_FROM_FIGMA] - Main text color
-- **Text Secondary**: #[INSERT_FROM_FIGMA] - Supporting text color
+### Light Theme Core Colors
+- **Primary**: #B8753A - Main brand color for CTAs and key elements  
+- **Secondary**: #4A4A4A - Supporting brand color  
+- **Accent**: #B8753A - Highlights and interactive elements  
+- **Background**: #F2F0EA - Main background color  
+- **Surface**: #FFFFFF - Card and component backgrounds  
+- **Text Primary**: #1A1A1A - Main text color  
+- **Text Secondary**: #4A4A4A - Supporting text color  
 
-### Dark Theme Colors
-- **Primary**: #[INSERT_FROM_FIGMA] - Main brand color for CTAs and key elements
-- **Secondary**: #[INSERT_FROM_FIGMA] - Supporting brand color
-- **Accent**: #[INSERT_FROM_FIGMA] - Highlights and interactive elements
-- **Background**: #[INSERT_FROM_FIGMA] - Main background color
-- **Surface**: #[INSERT_FROM_FIGMA] - Card and component backgrounds
-- **Text Primary**: #[INSERT_FROM_FIGMA] - Main text color
-- **Text Secondary**: #[INSERT_FROM_FIGMA] - Supporting text color
+### Dark-Section Embedded Colors
+- **Primary**: #B8753A - Main brand color for CTAs and key elements on dark sections  
+- **Secondary**: #CCCCCC - Supporting brand color on dark sections  
+- **Accent**: #B8753A - Highlights and interactive elements on dark sections  
+- **Background**: #2F2F2F - Main background color for isolated dark sections  
+- **Surface**: #3F3F3F - Card and component backgrounds within dark sections  
+- **Text Primary**: #F2F0EA - Main text color inside dark sections  
+- **Text Secondary**: #CCCCCC - Supporting text color inside dark sections  
 
 ## Typography System
 
-### Primary Font Options (Choose One)
-1. **Inter** - Modern, highly readable, excellent for tech brands
-2. **Poppins** - Geometric, friendly, great for automation/tech services
-3. **Raleway** - Elegant, sophisticated, perfect for professional services
-4. **Montserrat** - Current choice, geometric sans-serif
+### Primary Font Options
+- **Inter** - Modern, highly readable, excellent for tech brands
+
 
 ### Secondary/Accent Font Options
-1. **Lora** - Serif for contrast and elegance in headings
-2. **Playfair Display** - Sophisticated serif for special headings
-3. **Source Sans Pro** - Clean, professional for body text
+- **Source Sans Pro** - Clean, professional for body text
 
 ### Font Implementation
 - **Headings (H1-H3)**: Primary font, weights 400-700

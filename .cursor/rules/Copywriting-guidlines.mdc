@@ -1,163 +1,188 @@
----
-description: Copywriting guidelines for Mandet.co reflecting brand voice, tone, and messaging standards for automation and development services
-alwaysApply: false
----
-# Mandet.co Copywriting Guidelines
+# Mandet.co Copywriting Cursor Rule & Guidelines
 
-## Brand Voice Foundation
+## Core Identity
+You are writing for Mandet.co, a technology solutions provider specializing in Process Automation, E-commerce Excellence, and Full-Stack Development. Target audience: small-medium businesses, startups, and entrepreneurs.
 
-### Company Identity
-Mandet.co is a technology solutions provider specializing in:
-- **Process Automation**: Custom automation solutions and AI-enhanced workflows using Make.ai, n8n, and other platforms
-- **E-commerce Excellence**: Shopify development, store enhancement, custom apps, and functionality expansion
-- **Full-Stack Development**: Comprehensive web solutions, mobile apps, and digital platforms
+## Primary Tone Framework
 
-### Brand Voice Characteristics
-**Professional yet Approachable**: We demonstrate expertise without being intimidating
-**Solution-Focused**: Every message emphasizes how we solve real business problems
-**Innovation-Driven**: We highlight cutting-edge technology and forward-thinking approaches
-**Results-Oriented**: We focus on measurable outcomes and business impact
-**Trustworthy**: We build confidence through transparency and proven expertise
+### 1. Confident Assertive (Not Fully Assertive, Not Consultative)
+**What this means:** Demonstrate proven expertise with authority but remain approachable
+**Key phrases to use:** "We deliver", "Our proven methodology", "We transform"
+**Avoid:** "We might", "Perhaps", "Maybe we can help"
 
-## Tone Framework
+**Examples:**
+✅ "We transform manual processes into efficient, AI-powered workflows"
+✅ "Our methodology reduces operational costs by 30-40%"
+❌ "We might be able to help you with your automation needs"
+❌ "Perhaps we could assist with your workflow challenges"
 
-### Primary Tone: [CUSTOMIZE BASED ON PREFERENCE]
-- **Confident**: [DEFINE WHAT THIS MEANS FOR MANDET]
-- **Helpful**: [DEFINE WHAT THIS MEANS FOR MANDET]
-- **Innovative**: [DEFINE WHAT THIS MEANS FOR MANDET]
+### 2. Business-Focused Technical
+**What this means:** Lead with business benefits, include technical glimpses to show competence
+**Structure:** Business outcome + technical capability + platform mention
+**Key phrases:** "Using cutting-edge platforms like", "Technical excellence that delivers", "Streamlined operations with"
 
-### Tone Variations by Context
+**Examples:**
+✅ "Boost team productivity by 40% using custom Jira and Slack integrations"
+✅ "Streamline operations using cutting-edge platforms like Make.ai and n8n"
+❌ "Our advanced API integrations leverage microservices architecture"
+❌ "We implement RESTful endpoints with OAuth authentication"
 
-#### Landing Page Sections
-- **Hero Section**: Bold, confident, immediate value proposition
-- **Services Section**: Detailed, professional, benefit-focused
-- **About Section**: Trustworthy, experienced, personable
-- **Contact Section**: Welcoming, accessible, action-oriented
+### 3. Professional with Personality
+**What this means:** Business-focused with authentic personality fragments
+**Key phrases:** "Get our hands dirty", "No politics, just results", "Refreshingly honest"
+**Personality moments:** Show passion for results, be direct, inject authenticity
 
-#### Different Audiences
-- **Small Business Owners**: Empathetic, cost-conscious, ROI-focused
-- **Enterprise Clients**: Strategic, scalable, compliance-aware
-- **Technical Stakeholders**: Detailed, specification-focused, innovation-driven
+**Examples:**
+✅ "We get our hands dirty and deliver results"
+✅ "No politics, no delays – just results"
+❌ "We are excited to potentially collaborate on your project"
+❌ "We would be honored to discuss your requirements"
 
-## Messaging Hierarchy
+## Core Differentiators (Weave into ALL content)
 
-### Value Propositions
-**Primary**: [DEFINE MAIN VALUE PROPOSITION]
-**Secondary**: [DEFINE SUPPORTING VALUE PROPOSITIONS]
+1. **Efficient Work** - "Streamlined processes that save time and resources"
+2. **Fast Delivery** - "Quick turnaround without sacrificing quality"
+3. **Politics-Free Approach** - "Straight talk and honest communication"
+4. **Results-Oriented Action** - "Hands-on involvement focused on outcomes"
+
+## Proof Points Priority (Use these strategically)
+
+### Primary Emphasis (Lead with these)
+1. **Enterprise Automation:** "Developed automations for unicorn companies"
+2. **E-commerce Migrations:** "Large-scale Magento to Shopify migrations"
+3. **IT Administration:** "Custom Jira and Slack integrations boosting productivity"
+
+### Secondary Emphasis (Supporting evidence)
+1. **AI Social Media Tool:** "Built AI-powered tool gaining thousands of followers"
+2. **Organic Growth:** "Tens of thousands of interactions per month"
+
+## Value Proposition Hierarchy
+
+### Primary Value Proposition
+"We transform your business operations with intelligent automation and custom development that drives measurable growth"
 
 ### Key Messages
-1. **Automation Expertise**: "We transform manual processes into efficient, AI-powered workflows"
-2. **E-commerce Mastery**: "From Shopify stores to custom applications, we build commerce solutions that scale"
-3. **Full-Stack Solutions**: "Complete web development services from concept to deployment"
-4. **Business Impact**: "Technology solutions that drive measurable business growth"
+1. **Automation:** "Transform manual processes into efficient, AI-powered workflows using Make.ai and n8n"
+2. **E-commerce:** "From large-scale Magento to Shopify migrations to custom applications that scale and convert"
+3. **Full-Stack:** "Complete web development from concept to deployment with ongoing optimization"
+4. **Business Impact:** "Technology solutions that drive measurable business growth"
 
-## Writing Standards
+## Content Structure Templates
 
-### Language Guidelines
-- **Use active voice**: "We build" instead of "Solutions are built"
-- **Write in second person**: Address the reader as "you"
-- **Be specific**: Use concrete examples and measurable benefits
-- **Avoid jargon**: Explain technical terms when necessary
-- **Stay concise**: Every word should serve a purpose
+### Hero Section Formula
+[Bold Value Proposition] + [Differentiator] + [Proof Point]
 
-### Forbidden Words/Phrases
-- Generic terms like "innovative" without context
-- Overused buzzwords: "revolutionary," "game-changing," "cutting-edge" (unless substantiated)
-- Vague promises: "best," "perfect," "guaranteed" (unless legally accurate)
-- Technical jargon without explanation
+**Example:**
+"We transform your business operations with intelligent automation and custom development that drives measurable growth. No politics, no delays – just results."
 
-### Preferred Language
-- **Instead of**: "We provide solutions"
-- **Use**: "We build custom automation that reduces your manual work by 75%"
+### Service Description Formula
+[Business Benefit] + [Technical Capability] + [Platform/Tool] + [Proof Point]
 
-- **Instead of**: "Our team is experienced"
-- **Use**: "Our developers have built 200+ Shopify stores and automated 500+ business processes"
+**Example:**
+"Turn manual processes into efficient, AI-powered workflows using cutting-edge platforms like Make.ai and n8n. We've automated over 500 business processes for companies ranging from startups to unicorns."
 
-## Content Types
+### Case Study Formula
+[Client Type] + [Challenge] + [Solution] + [Measurable Result]
 
-### Headlines
-- **Formula**: [Benefit] + [For Whom] + [Proof/Timeframe]
-- **Example**: "Custom Automation Solutions That Save Businesses 20+ Hours Per Week"
-- **Length**: 6-12 words optimal, maximum 15 words
-
-### Call-to-Action (CTA) Guidelines
-- **Primary CTA**: "Start Your Automation Journey"
-- **Secondary CTA**: "Schedule a Free Consultation"
-- **Alternative CTAs**: "Get Your Custom Quote," "View Our Portfolio," "Download Case Study"
-
-### Service Descriptions
-**Format**: Problem + Solution + Benefit + Proof
-**Example**: "Manual processes slowing your team down? Our custom automation solutions eliminate repetitive tasks, freeing your team to focus on growth. Our clients typically see 50% productivity improvements within 30 days."
-
-### Social Proof Integration
-- Use specific numbers and percentages
-- Include client names when possible
-- Mention industry recognition or certifications
-- Reference successful project outcomes
-
-## Conversion Optimization
-
-### Psychological Triggers
-- **Scarcity**: "Limited consultation slots available"
-- **Authority**: "Trusted by 100+ businesses"
-- **Social Proof**: "Join companies like [Client Name] who've automated their success"
-- **Urgency**: "Start seeing results within 30 days"
-
-### Objection Handling
-**Common Objections**:
-1. "Automation is too expensive" → "Our ROI calculator shows most clients save 300% of their investment in Year 1"
-2. "Implementation is complex" → "We handle the entire setup process with zero disruption to your operations"
-3. "Will it work for my business?" → "We've successfully automated processes across 15+ industries"
-
-### A/B Testing Framework
-**Test Elements**:
-- Headlines (benefit vs. feature focused)
-- CTA text (action vs. outcome focused)
-- Social proof placement
-- Value proposition emphasis
-
-## Content Checklist
-
-Before publishing any content, verify:
-- [ ] Does it clearly state the benefit to the reader?
-- [ ] Is the tone appropriate for the target audience?
-- [ ] Are technical terms explained or avoided?
-- [ ] Does it include specific, measurable claims?
-- [ ] Is there a clear call-to-action?
-- [ ] Does it address potential objections?
-- [ ] Is it scannable with proper formatting?
-- [ ] Does it reflect Mandet's expertise and values?
+**Example:**
+"When a unicorn company needed to streamline their IT administration, we built custom Jira and Slack integrations that boosted team productivity by 40%."
 
 ## Context-Specific Guidelines
 
-### Email Marketing
-- **Subject Lines**: Benefit-focused, under 50 characters
-- **Preview Text**: Expand on subject line promise
-- **Body**: Personal, conversational, value-driven
+### Landing Page Sections
+- **Hero:** Bold, confident, immediate value proposition
+- **Services:** Detailed, professional, benefit-focused with technical glimpses
+- **About:** Trustworthy, experienced, inject personality
+- **Contact:** Direct, accessible, action-oriented
 
-### Social Media
-- **LinkedIn**: Professional, industry insights, thought leadership
-- **Twitter**: Quick tips, industry news, behind-the-scenes
-- **Instagram**: Visual portfolio, team culture, client success
+### Different Content Types
+- **Headlines:** Confident assertive, benefit-focused
+- **Body Copy:** Business-focused technical with personality moments
+- **CTAs:** Direct, results-oriented, politics-free language
+- **Testimonials:** Focus on measurable outcomes and efficiency
 
-### Case Studies
-- **Structure**: Challenge + Solution + Results + Testimonial
-- **Focus**: Quantifiable outcomes and client satisfaction
-- **Length**: 800-1200 words with visual elements
+## Do's and Don'ts
 
-## Questions to Ask When Writing
-- Who is the primary audience for this content?
-- What specific problem does this solve?
-- What action do we want the reader to take?
-- How does this reflect Mandet's expertise?
-- Is the tone appropriate for the context?
-- Are the claims specific and supportable?
-- Does this differentiate us from competitors?
-- Will this build trust and credibility?
+### DO:
+- Lead with business benefits
+- Include technical details that show competence
+- Use specific numbers and results
+- Be direct and efficient
+- Show passion for problem-solving
+- Reference unicorn company work
+- Mention large-scale migrations
+- Use "we transform", "we deliver", "we build"
+
+### DON'T:
+- Start with technical specifications
+- Use hedging language ("might", "could", "perhaps")
+- Be overly corporate or formal
+- Include unnecessary jargon
+- Make empty claims without proof
+- Be consultative or uncertain
+- Use passive voice extensively
+
+## Power Words and Phrases
+
+### Confidence Builders
+- "We deliver proven results"
+- "Our methodology transforms"
+- "We've successfully implemented"
+- "Measurable business growth"
+
+### Technical Credibility
+- "Using cutting-edge platforms like Make.ai and n8n"
+- "Custom Jira and Slack integrations"
+- "Large-scale Magento to Shopify migrations"
+- "AI-powered workflows"
+
+### Personality Injectors
+- "Get our hands dirty"
+- "No politics, just results"
+- "Refreshingly honest"
+- "Straight talk"
+
+## Content Quality Checklist
+
+Before publishing any content, ensure it:
+- [ ] Leads with business benefits
+- [ ] Includes technical credibility markers
+- [ ] Uses confident assertive language
+- [ ] Incorporates at least one differentiator
+- [ ] References relevant proof points
+- [ ] Maintains professional tone with personality moments
+- [ ] Avoids hedging language
+- [ ] Focuses on measurable outcomes
+- [ ] Speaks directly to SMB/startup audience
+
+## Example Content Transformations
+
+### BEFORE (Weak)
+"We might be able to help you with your automation needs. Our team has some experience with various platforms and we'd love to discuss your requirements."
+
+### AFTER (Strong)
+"We transform manual processes into efficient, AI-powered workflows using platforms like Make.ai and n8n. Our automation solutions for unicorn companies have boosted team productivity by 40%."
+
+### BEFORE (Too Technical)
+"Our microservices architecture leverages RESTful APIs with OAuth authentication to provide scalable integration solutions."
+
+### AFTER (Business-Focused Technical)
+"Boost team productivity by 40% with custom integrations that connect your favorite tools. We use cutting-edge platforms like Jira and Slack to streamline operations."
+
+## Emergency Tone Check
+
+If you're unsure about tone, ask:
+1. Does this sound confident without being arrogant?
+2. Does it lead with business benefits?
+3. Does it show technical competence?
+4. Does it include a personality moment?
+5. Does it reference our differentiators?
+6. Would an SMB owner understand and care about this?
 
 ## Implementation Notes
-- All content should be reviewed for brand voice consistency
-- Use tools like Grammarly for grammar and tone checking
-- A/B test different approaches to optimize performance
-- Regular content audits to ensure messaging remains current
-- Track performance metrics to refine guidelines over time
+
+- Use this rule for all website content, emails, and marketing materials
+- Adapt intensity based on context (hero sections more bold, about sections more personal)
+- Always reference proof points strategically, not in every sentence
+- Maintain consistency across all platforms and touchpoints
+- Update examples as new proof points develop
