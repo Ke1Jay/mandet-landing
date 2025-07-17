@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import Button from './ui/Button';
 
 export default function Navigation() {
@@ -19,8 +20,16 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="#" className="text-2xl font-bold text-primary">
-              Mandet.co
+            <a href="#" className="flex items-center gap-3">
+              <Image
+                src="/mandet-logo.svg"
+                alt="Mandet.co"
+                width={32}
+                height={32}
+                priority
+                className="h-8 w-8"
+              />
+              <span className="text-xl font-bold text-primary">Mandet.co</span>
             </a>
           </div>
 
