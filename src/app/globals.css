@@ -1,23 +1,24 @@
 @import "tailwindcss";
 
+/* Theme Variables */
 :root {
-  /* Mandet Brand Colors - Light Theme */
-  --primary: #B8753A;
-  --secondary: #4A4A4A;
-  --accent: #B8753A;
-  --background: #F2F0EA;
-  --surface: #FFFFFF;
-  --text-primary: #1A1A1A;
-  --text-secondary: #4A4A4A;
+  /* Deep Ocean Theme (Darker Green-Teal) */
+  --primary: #004D40;
+  --secondary: #1A237E;
+  --accent: #FF6F00;
+  --background: #FFFFFF;
+  --surface: #E0F2F1;
+  --text-primary: #212121;
+  --text-secondary: #616161;
   
   /* Dark Section Colors */
-  --dark-primary: #B8753A;
-  --dark-secondary: #CCCCCC;
-  --dark-accent: #B8753A;
-  --dark-background: #2F2F2F;
-  --dark-surface: #3F3F3F;
-  --dark-text-primary: #F2F0EA;
-  --dark-text-secondary: #CCCCCC;
+  --dark-primary: #26A69A;
+  --dark-secondary: #5C6BC0;
+  --dark-accent: #FFB74D;
+  --dark-background: #121212;
+  --dark-surface: #1E1E1E;
+  --dark-text-primary: #FFFFFF;
+  --dark-text-secondary: #B0BEC5;
   
   /* Spacing System */
   --spacing-xs: 0.25rem;

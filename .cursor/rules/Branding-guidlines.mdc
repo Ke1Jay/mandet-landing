@@ -1,7 +1,3 @@
----
-description: Branding guidelines for Mandet.co Next.js landing page with color tokens, typography, and visual identity standards
-alwaysApply: false
----
 
 # Mandet.co Branding Guidelines
 
@@ -13,6 +9,27 @@ Mandet.co specializes in:
 
 ## Color System
 
+## Deep Ocean (Darker Green-Teal)
+**Best for:** Innovation-focused messaging, tech leadership, professional services balancing reliability with cutting-edge appeal
+### Light Theme Core Colors
+- **Primary**: #004D40 - Deep teal-green for innovation with professional grounding  
+- **Secondary**: #1A237E - Deep indigo for trust and premium positioning  
+- **Accent**: #FF6F00 - Vibrant amber for attention and conversion optimization  
+- **Background**: #FFFFFF - Clean white for modern professionalism  
+- **Surface**: #E0F2F1 - Light teal surface for brand cohesion and subtle warmth  
+- **Text Primary**: #212121 - Dark charcoal for excellent readability (9.83:1 contrast ratio)  
+- **Text Secondary**: #616161 - Medium gray for visual hierarchy and supporting content  
+
+### Dark-Section Embedded Colors
+- **Primary**: #26A69A - Medium teal maintaining innovation signals in dark environments  
+- **Secondary**: #5C6BC0 - Lighter indigo for trust and visibility on dark backgrounds  
+- **Accent**: #FFB74D - Softer amber ensuring readability while maintaining energy  
+- **Background**: #121212 - Material Design dark surface for reduced eye strain  
+- **Surface**: #1E1E1E - Slightly lighter surface for component distinction and depth  
+- **Text Primary**: #FFFFFF - Pure white for maximum contrast and readability  
+- **Text Secondary**: #B0BEC5 - Light blue-gray for supporting content and hierarchy
+
+<!-- ## Orange theme colors
 ### Light Theme Core Colors
 - **Primary**: #B8753A - Main brand color for CTAs and key elements  
 - **Secondary**: #4A4A4A - Supporting brand color  
@@ -29,7 +46,7 @@ Mandet.co specializes in:
 - **Background**: #2F2F2F - Main background color for isolated dark sections  
 - **Surface**: #3F3F3F - Card and component backgrounds within dark sections  
 - **Text Primary**: #F2F0EA - Main text color inside dark sections  
-- **Text Secondary**: #CCCCCC - Supporting text color inside dark sections  
+- **Text Secondary**: #CCCCCC - Supporting text color inside dark sections -->
 
 ## Typography System
 
